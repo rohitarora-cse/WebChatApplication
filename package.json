@@ -1,0 +1,8 @@
+{
+  "name": "WebChatApplication",
+  "version": "0.1.0",
+  "description": "Web Chat Application",
+  "dependencies": {
+    "express": "4.x"
+  }
+}
