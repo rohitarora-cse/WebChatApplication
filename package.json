@@ -2,6 +2,9 @@
   "name": "WebChatApplication",
   "version": "0.1.0",
   "description": "Web Chat Application",
+  "main": "application.js",
+  "author": "Rohit Arora",
+  "readmeFilename": "README.md"
   "dependencies": {
     "express": "4.x"
   }
