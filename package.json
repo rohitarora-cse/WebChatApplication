@@ -4,8 +4,9 @@
   "description": "Web Chat Application",
   "main": "application.js",
   "author": "Rohit Arora",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
   "dependencies": {
-    "express": "4.x"
+    "express": "4.x",
+    "socket.io": "^1.1.0"
   }
 }
