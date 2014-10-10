@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   <title>{{ title }}</title>
+  </head>
+
+  <body>
+    <div class="jumbotron">
+      <div class="container">
+	    <h1>{{ title }}</h1>
+	    {{#if data}}
+	    data Found:
+	    <ul>
+      	{{#data}}
+            <li title="job: {{job}} status: {{status}}">
+          	{{name}}
+          </li>
+          {{/data}}
+          </ul>
+	    {{else}}
+	    no data found.
+	    {{/if}}
+	    <p>Welcome to {{ title }}</p>
+	  </div>
+    </div>
+</body>
+</html>
