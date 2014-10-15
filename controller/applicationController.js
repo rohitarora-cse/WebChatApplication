@@ -11,12 +11,27 @@ module.exports = function(app) {
 
 	app.post('/login', function(req, res) {
 		if (userService.isValidUser(req.body.username, req.body.password)) {
-			res.render('chat', {
-				users : userService.getOtherUsers(req.body.username)
-			});
+			session = app.sessionManager.getSession(req, res);
+			session.set('username',req.body.username);
+			res.redirect('/chat');
 		}
  		else {
 			res.redirect('/');
 		}
+	});
+	
+	app.get('/logout', function(req, res) {
+		app.sessionManager.getSession(req, res,false).destroySession();
+		res.redirect('/');
+	});
+
+	app.get('/chat', function(req, res) {
+		var session = app.sessionManager.getSession(req, res,false);
+		if(session === null) {
+			res.redirect('/');
+		}
+		res.render('chat', {currentUser : session.get('username'),
+			users : userService.getOtherUsers(session.get('username'))
+		});
 	});
 };

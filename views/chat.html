@@ -35,17 +35,17 @@ form button {
 	padding: 10px;
 }
 
-#messages {
+.messages {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 }
 
-#messages li {
+.messages li {
 	padding: 5px 10px;
 }
 
-#messages li:nth-child(odd) {
+.messages li:nth-child(odd) {
 	background: #eee;
 }
 </style>
@@ -57,14 +57,17 @@ form button {
 	    <ul>
       	{{#users}}
             <li>
-          	{{this}}
+          	{{this}}<br>
+          	<ul id ="{{this}}Window" class="messages">
+          	<li><input type="text" id ="{{this}}TextBox" autocomplete="off"><input type="button" onclick="sendMessage('{{this}}');" value="Send"> </li>
+          	</ul>
           </li>
           {{/users}}
           </ul>
 	    {{/if}}
 
 </ul>
-	<ul id="messages"></ul>
+	
 	<form action="">
 		<input id="m" autocomplete="off" />
 		<button>Send</button>
@@ -73,13 +76,17 @@ form button {
 	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 	<script>
 	  var socket = io();
-	  $('form').submit(function(){
-		  socket.emit('message',$('#m').val());
-		  $('#m').val('');
-		  return false;
-	  });
-	  socket.on('message',function(msg){
-			$('#messages').append($('<li>').text(msg));
+	  socket.emit('bindUserToSocket','{{currentUser}}');
+	  function sendMessage(toUser)
+	  {
+		  var textMsg = $('#'+toUser+'TextBox').val(); 
+		  socket.emit('message',{fromUser : '{{currentUser}}', forUser : toUser, msg: textMsg});
+		  $('#'+toUser+'Window').append($('<li>').text(textMsg));
+		  $('#'+toUser+'TextBox').val('');
+	  }
+
+	  socket.on('message',function(msgObject){
+			$('#'+msgObject.fromUser+'Window').append($('<li>').text(msgObject.msg));
 		});
 	</script>
 </body>

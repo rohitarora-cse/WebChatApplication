@@ -4,13 +4,9 @@ var userMap = new HashMap();
 userMap.set('rohit','1234');
 userMap.set('aplesh','1234');
 userMap.set('harish','1234');
-/*{
-	'rohit' : '1234',
-	'aplesh' : '1234',
-	'harish' : '1234',
-	'mukesh' : '1234',
-	'daljeet' : '1234'
-};*/
+userMap.set('mukesh','1234');
+userMap.set('daljeet','1234');
+
 
 exports.isValidUser = function(user, password) {
 	//var savedPassword = userMap[user];
