@@ -27,11 +27,14 @@ module.exports = function(app) {
 
 	app.get('/chat', function(req, res) {
 		var session = app.sessionManager.getSession(req, res,false);
-		if(session === null) {
+		if(session == null) {
 			res.redirect('/');
 		}
-		res.render('chat', {currentUser : session.get('username'),
-			users : userService.getOtherUsers(session.get('username'))
-		});
+		else {
+			res.render('chat', {
+				currentUser : session.get('username'),
+				users : userService.getOtherUsers(session.get('username'))
+			});
+		}
 	});
 };

@@ -81,12 +81,12 @@ form button {
 	  {
 		  var textMsg = $('#'+toUser+'TextBox').val(); 
 		  socket.emit('message',{fromUser : '{{currentUser}}', forUser : toUser, msg: textMsg});
-		  $('#'+toUser+'Window').append($('<li>').text(textMsg));
+		  $('#'+toUser+'Window').append($('<li>').text('{{currentUser}}' + ' : ' + textMsg));
 		  $('#'+toUser+'TextBox').val('');
 	  }
 
 	  socket.on('message',function(msgObject){
-			$('#'+msgObject.fromUser+'Window').append($('<li>').text(msgObject.msg));
+			$('#'+msgObject.fromUser+'Window').append($('<li>').text(msgObject.fromUser + ' : ' + msgObject.msg));
 		});
 	</script>
 </body>

@@ -1,41 +1,37 @@
-var express = require('express');
-var app = express();
-var http = require('http').createServer(app);
-var socketManager = require('socket.io')(http);
-var options = {root: __dirname};
-var bodyParser = require('body-parser');
+function timePass(){return null;}
+function myFunction() {
+    var testVariable,result;
+testVariable = undefined;
+	result = "";
+    if(testVariable === null)
+		result += " ===null ";
+    if(testVariable == null)
+		result += " ==null ";
+		
+    if(testVariable === undefined)
+		result += " ===undefined ";
+    if(testVariable == undefined)
+		result += " ==undefined ";
 
-app.set('views', './views');
-app.set('view engine', 'html');
-app.engine('html', require('jade').__express);
+    if(testVariable === 'undefined')
+		result += " ===\'undefined\' ";
+    if(testVariable == 'undefined')
+		result += " ==\'undefined\' ";
 
-//app.use( bodyParser.json());
-app.use( bodyParser.urlencoded());
+    if(typeof testVariable === undefined)
+		result += " typeof===undefined ";
+    if(typeof testVariable == undefined)
+		result += " typeof==undefined ";
+		
+   if(typeof testVariable === 'undefined')
+		result += " typeof===\'undefined\' ";
+    if(typeof testVariable == 'undefined')
+		result += " typeof==\'undefined\' ";
+    
+    console.log(result);
+    console.log(testVariable);
+    console.log(typeof testVariable);
+    
+}
 
-app.get('/',function(req,res)
-{
-	//res.sendFile('home.html',options);
-	res.render('chat',{title : 'Home',message : 'Hurray !'});
-});
-
-app.post('/startChat',function(req,res)
-{
-	console.log(req.body.username);
-	console.log(req.body.password);
-	res.render('chat', {});
-});
-
-socketManager.on('connection',function(socket)
-		{
-			console.log('user connected');
-			socket.on('message',function(msg){
-				socketManager.emit('message', msg);
-			});
-			socket.on('disconnect',function(socket)
-					{
-				console.log('user disconnected');
-			});
-		});
-
-http.listen(8080);
-console.log('server running');
+myFunction();

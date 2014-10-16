@@ -22,6 +22,9 @@ exports.isValidUser = function(user, password) {
 
 exports.getOtherUsers = function(user) {
 	var usernameArray = userMap.keys();
+	if(usernameArray.indexOf(user) == -1) {
+		return null;
+	}
 	usernameArray.splice(usernameArray.indexOf(user),1);
 	return usernameArray;
 };

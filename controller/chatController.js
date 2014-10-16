@@ -12,8 +12,9 @@ module.exports = function(app) {
 					socketManager.userToSocketMap.set(msg, socket);
 				});
 				socket.on('message',function(msgObject){
-					socketManager.userToSocketMap.get(msgObject.forUser).emit('message',{fromUser : msgObject.fromUser, msg : msgObject.msg});
-					//socketManager.emit('message', msg);
+					userSocket = socketManager.userToSocketMap.get(msgObject.forUser);
+					if(userSocket != null)
+						userSocket.emit('message',{fromUser : msgObject.fromUser, msg : msgObject.msg});
 				});
 				socket.on('disconnect',function(socket)
 						{
